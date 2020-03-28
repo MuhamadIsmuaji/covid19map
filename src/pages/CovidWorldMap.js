@@ -7,13 +7,14 @@ import highchartsMap from "highcharts/modules/map";
 import HighchartsReact from "highcharts-react-official";
 import worldMapData from "@highcharts/map-collection/custom/world.geo.json";
 import { useState, useEffect } from 'react';
+import moment from 'moment';
 
 export const CovidWorldMap = () => {
   const [worldMapCovidData, setworldMapCovidData] = useState([]);
 
   const fetchData = async () => {
     try {
-      const { data } = await API.get();
+      const { data } = await API.get();      
       let temp = null;
       _.each(countries, (value, key) => {
         temp = _.find(data, (o) => {
@@ -21,11 +22,13 @@ export const CovidWorldMap = () => {
         });
 
         countries[key].Deaths = countries[key].Recovered = countries[key].Active = countries[key].value = 0;
+        countries[key].Last_Update = moment().format('DD/M/YYYY, hh:mm A');
         if (typeof temp !== 'undefined') {
           countries[key].Deaths = temp.attributes.Deaths;
           countries[key].Recovered = temp.attributes.Recovered;
           countries[key].Active = temp.attributes.Active;
           countries[key].value = temp.attributes.Confirmed;
+          countries[key].Last_Update = moment(temp.attributes.Last_Update).format('DD/M/YYYY, hh:mm A');
         }
       });
 
@@ -65,11 +68,12 @@ export const CovidWorldMap = () => {
     tooltip: {
       useHTML: true,
       headerFormat: '',
-      pointFormat: `<span style="font-size: 25px;"><strong>{point.name}</strong></span><br/>
+      pointFormat: `<span style="font-size: 25px;"><strong>{point.name}</strong></span><br/><br/>
         <span style="font-size: 20px;">Positif: {point.Active}</span><br/>
         <span style="font-size: 20px;">Sembuh: {point.Recovered}</span><br/>
         <span style="font-size: 20px;">Meninggal: {point.Deaths}</span><br/>
-        <span style="font-size: 20px;">Total Kasus: {point.value}</span>`,
+        <span style="font-size: 20px;">Total Kasus: {point.value}</span><br/><br/>
+        <span style="font-size: 12px;">Update Terakhir: {point.Last_Update}</span>`,
     },
 
     colorAxis: {
