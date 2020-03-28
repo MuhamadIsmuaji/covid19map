@@ -23,7 +23,7 @@ function App() {
 
             <div className="navbar-end">
               <div className="navbar-item">
-                <a className="bd-navbar-icon navbar-item" href="https://github.com/MuhamadIsmuaji" target="_blank" rel="noopener noreferrer">
+                <a className="bd-navbar-icon navbar-item" href="https://github.com/MuhamadIsmuaji/covid19map" target="_blank" rel="noopener noreferrer">
                   <FontAwesomeIcon icon={faGithub} size="2x" />
                 </a>
               </div>
