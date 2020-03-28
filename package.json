@@ -2,7 +2,7 @@
   "name": "covid19map",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://muhamadismuaji.github.io/",
+  "homepage": "https://muhamadismuaji.github.io/covid19map",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
